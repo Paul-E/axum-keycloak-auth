@@ -124,6 +124,12 @@ impl From<uuid::Error> for AuthError {
     }
 }
 
+impl From<std::convert::Infallible> for AuthError {
+    fn from(infallible: std::convert::Infallible) -> Self {
+        match infallible {}
+    }
+}
+
 impl IntoResponse for AuthError {
     fn into_response(self) -> Response {
         let (status, error_message) = match self {
